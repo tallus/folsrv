@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{%block content %}
+<div class="transbox">
+    <h1 class="title">Welcome to TSBackup</h1>   
+    <p class="sans-big"><strong>Today's recycle date is {{recycle_date}}</strong></p> 
+        <dl>
+                {% for topic in topics %}
+                <dt class="sans"><strong>{% if topic.url %}<a href="downloads/{{topic.url}}">{{topic.title}}</a>{% else %}{{topic.title}}{% endif %}</strong></dt>
+                <dd class="sans">{{ topic.body|safe }}</dd>
+                {% endfor %}
+
+                <dt class="sans"><strong>Tech Support Tools</strong></dt>
+            <dd class="sans">This is a package  containing a bunch of usefull shell scripts for tech support purposes. The main ones of interest are <code>ts_network_backup</code> which automates the network backup process and <code>ts_identify_backups</code> which is used in conjunction with it (given a ticket number it will identify the directory it was backed up to.<br />
+            The latest stable version is packaged as a deb in the Free Geek archive so you should be able to install it using apt-get <code>apt-get install fg_tstools</code><br />
+
+            The current version is {{current_version}}<br />
+
+            Bug reports are welcome via email to bugs@todo.freegeek.org (or the bugs queue in RT). Please include any output/error messages and the version you were using, thank you.<br />
+            <strong>History</strong><br />
+            <dl class="flat">
+                {% for version in versions %}
+                <dt class="flat">{{version.number}}</dt>
+                <dd class="flat">{{ version.content|safe }}</dd>
+                {% endfor %}
+                </dl>
+        </dd>
+    </dl>
+
+    <p class="sans-small">background image:<br /><a href="https://secure.flickr.com/photos/45072502@N02/4317288312/">Royal Bluebells - Charlotte Pass</a>, Peter Kent, Flickr. <a href="http://creativecommons.org/licenses/by-nc/2.0/deed.en_GB">Some rights reserved</a>.</p>
+</div>
+{% endblock %}
