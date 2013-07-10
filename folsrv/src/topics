@@ -1,0 +1,32 @@
+[
+    {
+        'title' : 'Training Material', 
+        'body' : '''Useful reference and other training materials for new tech support interns.<br />
+                <dl>
+                    <dt class=sans"><a href="/downloads/command-line.pdf">Introduction to the Command Line</a> (PDF)</dt>
+                        <dd class="sans">A Free manual published by <a href="http://flossmanuals.net/">flossmanuals.net</a>. It is also available online, in HTML format at<br /> <a href="http://flossmanuals.net/command-line/">http://flossmanuals.net/command-line</a>
+                        </dd>
+                </dl>'''
+    },
+    {
+        'title' : 'upgrade-ubuntu.sh',
+        'url' : 'upgrade-ubuntu.sh',
+        'body' : '''Use this to upgrade form 10.04 to 12.04. <br>N.B. 
+                    This script performs a backup, so you should not do one first as it will complain. You can force it to overwrite it with the -f option. 
+                    <p>Steps to upgrade the script. 
+                    <strong> Note the following carefully:</strong>
+                    </p>
+                    <ol>
+                        <li>Run the script, carefully noting any instructions given</li>
+                        <li><strong>When prompted to reboot. DO NOT REBOOT</strong></li>
+                        <li>Press x, then type reboot on the command line.</li>
+                        <li> Rerun the script a second time to finish the process</li>
+                    </ol>'''
+    },
+    {
+        'title' : 'whoopsie-disable.sh',
+        'url' : 'whoopsie-disable.sh',
+        'body' : 'A small shell script that will disable the annoying crash reports on 12.04'
+    }
+]
+

@@ -1,0 +1,14 @@
+[
+    { 
+        'number' : '0.1.13',
+        'content' : ''' &laquo;Lucky Thirteen&raquo;<br />
+
+                    <del><a href ="http://todo.freegeek.org/Ticket/Display.html?id=34487">#34487</a></del> <del><a href="http://todo.freegeek.org/Ticket/Display.html?id=32908">#32908</a></del> Hopefully fixed the bug which prevented backups when there was a space in the directory name (for reals this time).<br>
+Added a long list of temporary files that will be excluded from backups.<br>
+
+Fixed a bug with adding an addendum that left off the ticket number. (Also closing <del><a href="http://todo.freegeek.org/Ticket/Display.html?id=33225">#33225</a></del>) <br>
+
+Added a -R option for read only file systems e.g. dd images.'''
+    }
+]
+
