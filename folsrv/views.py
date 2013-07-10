@@ -15,14 +15,14 @@ def index():
         # note this allows embedded html(+js etc) i.e. passed to jinja2
         # by being piped through safe, so only good for static files
 
-        f = open('src/topics', r)
+        f = open('folsrv/src/topics', 'r')
         topic_txt = f.read()
-        topics = ast_eval(topic_txt]
+        topics = ast_eval(topic_txt)
         f.close()
         
-        f = open('src/fg_tstools', r)
+        f = open('folsrv/src/fg_tstools', 'r')
         ver_txt = f.read()
-        versions = ast_eval(ver_txt]
+        versions = ast_eval(ver_txt)
         f.close()
         
         # get current version no
