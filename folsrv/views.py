@@ -55,7 +55,7 @@ def json_ticket(ticket_no):
 
 
 def get_backup_list(ticket):
-    backups = glob.glob('/srv/tsbackup/*-' + ticket)
+    backups = glob.glob('/srv/tsbackup/*-' + ticket + '*') 
     return backups
 
 
