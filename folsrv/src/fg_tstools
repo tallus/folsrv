@@ -24,19 +24,19 @@ Added a -R option for read only file systems e.g. dd images.'''
     }, 
     {
         'number' : '0.1.10'
-        content :  '>Fixed bug in user restoration process.'
+        'content' :  '>Fixed bug in user restoration process.'
     }, 
     {
         'number' : '0.1.9'
-        content :  'Fixed bug preventing proper cleanup.'
+        'content' :  'Fixed bug preventing proper cleanup.'
     }, 
     {
         'number' : '0.1.8'
-        content :  'Added fix for issue where creating users with uid 1000 who were not oem failed.'
+        'content' :  'Added fix for issue where creating users with uid 1000 who were not oem failed.'
     },
     {
         'number' : '0.1.7'
-        content :  'Tidied up help for many tools. Added README. Bugfixes.'
+        'content' :  'Tidied up help for many tools. Added README. Bugfixes.'
     },
     {
         'number' : '0.1.6'
