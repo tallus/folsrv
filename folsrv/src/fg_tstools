@@ -9,6 +9,37 @@ Added a long list of temporary files that will be excluded from backups.<br>
 Fixed a bug with adding an addendum that left off the ticket number. (Also closing <del><a href="http://todo.freegeek.org/Ticket/Display.html?id=33225">#33225</a></del>) <br>
 
 Added a -R option for read only file systems e.g. dd images.'''
+    },
+    {
+        'number' : '0.1.12 '
+        content :  ' Bug Fixes:<br />Fixed #33225 which prevented the -t option from working correctly.'
+    },
+    {
+        'number' : '0.1.11'
+        content :  'Bug Fixes:<br />
+            <del>32902</del> ts_network_backup failed w/ requesting -p option<br />
+            <del>32599</del> rm: cannot remove `=/home/gshadow': No such file or directory</br>
+            <del>32823</del>usermod: group ' ' does not exist</br>
+            <del>#32908</del>: check_dir_read fails if there are spaces in path'
+    }, 
+    {
+        'number' : '0.1.10'
+        content :  '>Fixed bug in user restoration process.'
+    }, 
+    {
+        'number' : '0.1.9'
+        content :  'Fixed bug preventing proper cleanup.'
+    }, 
+    {
+        'number' : '0.1.8'
+        content :  'Added fix for issue where creating users with uid 1000 who were not oem failed.'
+    },
+    {
+        'number' : '0.1.7'
+        content :  'Tidied up help for many tools. Added README. Bugfixes.'
+    },
+    {
+        'number' : '0.1.6'
+        content :  'Initial Release'
     }
 ]
-
