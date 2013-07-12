@@ -1,10 +1,13 @@
+<<<<<<< HEAD
 from flask import render_template, flash, redirect, jsonify
 from flask import Markup 
+=======
+from flask import render_template, flash, redirect, jsonify, Markup
+>>>>>>> ba9d550d3ec0a712f9b8d457e45ecf35d0f317f5
 from folsrv import app
 import datetime
 import glob
 from ast import literal_eval as ast_eval
-from  json import JSONEncoder as jenc
 
 
 @app.route("/")
@@ -49,9 +52,15 @@ def show_ticket(ticket_no):
 def json_ticket(ticket_no):
     backups = get_backup_list(ticket_no)
     if not backups:
+<<<<<<< HEAD
         return jsonify(backups=[])
     else:
         return jsonify(backups=backups)
+=======
+        return jsonify([])
+    else:
+        return jsonify(backups)
+>>>>>>> ba9d550d3ec0a712f9b8d457e45ecf35d0f317f5
 
 
 def get_backup_list(ticket):
