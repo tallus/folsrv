@@ -2,6 +2,7 @@ from flask import render_template, flash, redirect, jsonify, Markup
 from folsrv import app
 import datetime
 import glob
+import os.path
 from ast import literal_eval as ast_eval
 
 
@@ -53,7 +54,11 @@ def json_ticket(ticket_no):
 
 
 def get_backup_list(ticket):
-    backups = glob.glob('/srv/tsbackup/*-' + ticket + '*') 
+    # TODO REMOVE FULL PATH
+    #backups = glob.glob('/srv/tsbackup/*-' + ticket + '*') 
+    backups = []
+    for f in glob.glob('/srv/tsbackup/*-' + ticket + '*'):
+            backups.append(os.path.basename(f))
     return backups
 
 
