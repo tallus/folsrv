@@ -54,8 +54,6 @@ def json_ticket(ticket_no):
 
 
 def get_backup_list(ticket):
-    # TODO REMOVE FULL PATH
-    #backups = glob.glob('/srv/tsbackup/*-' + ticket + '*') 
     backups = []
     for f in glob.glob('/srv/tsbackup/*-' + ticket + '*'):
             backups.append(os.path.basename(f))
