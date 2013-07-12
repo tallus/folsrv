@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect
+from flask import render_template, flash, redirect, jsonify
 from flask import Markup 
 from folsrv import app
 import datetime
@@ -49,9 +49,9 @@ def show_ticket(ticket_no):
 def json_ticket(ticket_no):
     backups = get_backup_list(ticket_no)
     if not backups:
-        return ''
+        return jsonify(backups=[])
     else:
-        return jenc.encode(backups)
+        return jsonify(backups=backups)
 
 
 def get_backup_list(ticket):
