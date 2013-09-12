@@ -1,4 +1,12 @@
 [
+    {
+        'number' : '0.1.15',
+        'content' : 'Stable Release. Installable via apt-get!'
+    },
+    {
+        'number' : '0.1.14',
+        'content' : 'Withdrawn'
+    },
     { 
         'number' : '0.1.13',
         'content' : ''' &laquo;Lucky Thirteen&raquo;<br />
@@ -8,6 +16,11 @@
             Fixed a bug with adding an addendum that left off the ticket number. (Also closing <del><a href="http://todo.freegeek.org/Ticket/Display.html?id=33225">#33225</a></del>) <br>
             Added a -R option for read only file systems e.g. dd images.'''
     },   
+    {
+        'number' : '.0.0.12',
+        'content' : '''Bug Fixes:<br />
+        Fixed #33225 which prevented the -t option from working correctly. '''
+    },
     {
         'number' : '0.1.11',
         'content' :  '''Bug Fixes:<br />
