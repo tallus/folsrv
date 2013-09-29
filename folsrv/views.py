@@ -33,6 +33,8 @@ def index():
         return render_template("index.html", recycle_date = recycle_date, topics = topics, current_version = current_version, versions = versions)
 
 
+#TODO (add option to) return dir size as well as name
+
 # for urls of form /ticket/[ticket_no] return space separated list 
 @app.route("/ticket/<path:ticket_no>")
 def show_ticket(ticket_no):
@@ -59,6 +61,14 @@ def get_backup_list(ticket):
             backups.append(os.path.basename(f))
     return backups
 
+
+def get_directory_size(start_path):
+    total_size = 0
+    for dirpath, dirnames, filenames in os.walk(start_path):
+        for f in filenames:
+            fp = os.path.join(dirpath, f)
+            total_size += os.path.getsize(fp)
+    return total_size
 
 def get_recycle_date():
     today = datetime.date.today()
