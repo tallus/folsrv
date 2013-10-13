@@ -2,7 +2,8 @@
 '''Tool for updating the file size db.'''
 import glob
 import os
-import pickledb
+import sys
+import argparse
 
 class MyError(Exception):
     pass
@@ -97,7 +98,7 @@ def remove_nonexistant_directories_in_db(dbfile, dpath):
     db.dumpdb()
 
 
-def reload_db(dbfile, dbpath):
+def force_reload_db(dbfile, dbpath):
     '''forces reloading of db entries from scratch'''
     db = jsondb.load(dbfile)
     db.deldb()
@@ -108,3 +109,29 @@ def reload_db(dbfile, dbpath):
         db.set(dirname, dirsize)
     db.dumpdb
 
+def read_options():
+    '''read command line options'''
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-f", "--force", help="force a rebuild of the fili size database", action="store_true")
+    args = parser.parse_args()
+    if args.force:
+        action = "force"
+    else:
+        action = None
+    return action
+
+
+#TODO function to add/update file size for given folder
+# needs to be supplied as name only no paths
+# need to sanitize -- with basename??
+
+def main():
+    action = read_options()
+    if action == 'force':
+        force_reload_db(DBFILE, DBPATH)
+    else:
+        remove_nonexistant_directories_in_db(DBFILE, DBPATH)
+        update_filesizes_in_db(DBFILE, DBPATH)
+
+if __name__ == "__main__":
+    main()
