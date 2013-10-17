@@ -106,17 +106,6 @@ def force_reload_db(dbfile, dpath):
         db.set(dirname, dirsize)
     db.dumpdb
 
-def read_options():
-    '''read command line options'''
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-f", "--force", help="force a rebuild of the fili size database", action="store_true")
-    args = parser.parse_args()
-    if args.force:
-        action = "force"
-    else:
-        action = None
-    return action
-
 def sanitize(spath):
     '''sanitize a path to only return valid folder names, in the form 
     that roughly corresponds to 20130101-31245, note we allow ticket numbers
@@ -128,14 +117,32 @@ def sanitize(spath):
     else:
         return None
 
-def add_filesize((dbfile, dpath, directory):
+def add_directory_sizedbfile,(dbfile, dpath, directory):
     '''update db with direxctory size'''
-    dirname = sanitize(folder)
+    dirname = sanitize(directory)
     fullpath = os.path.join(dpath, dirname)
     db = jsondb.load(dbfile)
     dirsize = get_directory_size(fullpath)
     db.set(dirname, dirsize)
     db.dumpdb
+
+def get_size(dbfile, directory):
+    '''returns the directory size from the db'''
+    dirname = sanitize(directory)
+    db = jsondb.load(dbfile)
+    return db.get(dirname)
+
+def read_options():
+    '''read command line options'''
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-f", "--force", help="force a rebuild of the file size database", action="store_true")
+    args = parser.parse_args()
+    if args.force:
+        action = "force"
+    else:
+        action = None
+    return action
+
 
 def main():
     action = read_options()
