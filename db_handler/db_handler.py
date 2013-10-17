@@ -20,7 +20,6 @@ class jsondb(dbfile):
     def set(self, key, value):
         '''Set the (string,int,whatever) value of a key'''
         self.db[key] = value
-        return True
 
     def get(self, key):
         '''Get the value of a key'''
@@ -36,7 +35,6 @@ class jsondb(dbfile):
     def rem(self, key):
         '''Delete a key'''
         del self.db[key]
-        return True
     
     def kexists(self, key):
         '''determine if key exists in db'''
@@ -48,7 +46,6 @@ class jsondb(dbfile):
     def deldb(self):
         '''Delete everything from the database'''
         self.db= {}
-        return True
 
     def _load(self):
         '''load db from file'''
@@ -73,7 +70,7 @@ def get_directory_list(dpath):
     with fully qualified paths'''
     if not os.path.isdir(dpath):
         raise MyError('oops %s is not a directory'% dpath)
-    dirs = [os.path.join(dpath, filename) for filename in os.listdir(dpath)  if (os.path.isdir(os.path.join(dpath, filename)))]
+    dirs = [os.path.join(dpath, filename) for filename in os.listdir(dpath) if (os.path.isdir(os.path.join(dpath, filename)))]
     return dirs
 
 def update_filesizes_in_db(dbfile, dpath):
@@ -98,7 +95,7 @@ def remove_nonexistant_directories_in_db(dbfile, dpath):
     db.dumpdb()
 
 
-def force_reload_db(dbfile, dbpath):
+def force_reload_db(dbfile, dpath):
     '''forces reloading of db entries from scratch'''
     db = jsondb.load(dbfile)
     db.deldb()
@@ -120,10 +117,25 @@ def read_options():
         action = None
     return action
 
+def sanitize(spath):
+    '''sanitize a path to only return valid folder names, in the form 
+    that roughly corresponds to 20130101-31245, note we allow ticket numbers
+    5 or greater digits in length and any date with 8 digits and any addendum'''
+    folname = os.path.basename(spath)
+    validname = re.compile('^[0-9]{8}-[0-9]{5,}.*')
+    if validname.match(folname):
+        return folname
+    else:
+        return None
 
-#TODO function to add/update file size for given folder
-# needs to be supplied as name only no paths
-# need to sanitize -- with basename??
+def add_filesize((dbfile, dpath, directory):
+    '''update db with direxctory size'''
+    dirname = sanitize(folder)
+    fullpath = os.path.join(dpath, dirname)
+    db = jsondb.load(dbfile)
+    dirsize = get_directory_size(fullpath)
+    db.set(dirname, dirsize)
+    db.dumpdb
 
 def main():
     action = read_options()
