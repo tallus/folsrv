@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+import unittest
+import os
+#import db_handler
+from db_handler import *
+class MyTests(unittest.TestCase):
+        # pylint: disable=R0904
+
+    def setUp(self):
+        self.db = jsondb("test.db")
+
+    def tearDown(self):
+        if os.path.exists("test.db"):
+            os.remove("test.db")
+
+    def test_get_set(self):
+        self.db.set('foo', 'foo')
+        foo = self.db.get('foo')
+        self.assertEquals(foo,'foo')
+
+
+if __name__ == "__main__":
+    unittest.main()
+
