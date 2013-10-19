@@ -13,6 +13,9 @@ class MyTests(unittest.TestCase):
         if os.path.exists("test.db"):
             os.remove("test.db")
 
+    def test_initialization(self):
+        self.assertEquals(len(self.db.db), 0)
+
     def test_get_set(self):
         self.db.set('foo', 'foo')
         foo = self.db.get('foo')
