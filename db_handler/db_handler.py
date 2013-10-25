@@ -5,59 +5,10 @@ import os
 import sys
 import re
 import argparse
+import minidb
 
 class MyError(Exception):
     pass
-
-class jsondb:
-    '''load a dictionary from a json file as a key-value store'''
-    def __init__(self, dbfile):
-        '''load dbfile as dict, blank if file does not exist yes'''
-        self.dbfile = os.path.expanduser(dbfile)
-        if os.path.exists(self.dbfile):
-            self.db  = self._load(self.dbfile)
-        else:
-            self.db  = {}
-
-    def set(self, key, value):
-        '''Set the (string,int,whatever) value of a key'''
-        self.db[key] = value
-
-    def get(self, key):
-        '''Get the value of a key'''
-        try:
-            return self.db[key]
-        except KeyError:
-            return None
-
-    def getall(self):
-        '''return a list of all the keys'''
-        return self.db.keys()
-
-    def rem(self, key):
-        '''Delete a key'''
-        del self.db[key]
-    
-    def kexists(self, key):
-        '''determine if key exists in db'''
-        if key in self.db:
-            return True
-        else:
-            return False
-     
-    def deldb(self):
-        '''Delete everything from the database'''
-        self.db = {}
-    
-    def _load(self):
-        '''load db from file'''
-        db  = json.load(open(self.dbfile, 'rb'))
-        return db
-
-    def dumpdb(self):
-        '''write to file'''
-        json.dump(self.db, open(self.dbfile, 'wb'))
-
 def get_directory_size(start_path):
     '''get size of directory and contents'''
     total_size = 0
@@ -78,7 +29,7 @@ def get_directory_list(dpath):
 def update_filesizes_in_db(dbfile, dpath):
     '''update the database with any new folders created since the last time 
     this was run. N.B. This doesn't check for changed file sizes'''
-    db = jsondb(dbfile)
+    db = minidb(dbfile)
     dirlist = get_directory_list(dpath)
     for directory in dirlist:
         dirname = os.path.basename(directory)
@@ -89,7 +40,7 @@ def update_filesizes_in_db(dbfile, dpath):
 
 def remove_nonexistant_directories_in_db(dbfile, dpath):
     '''removes keys for directories that no longer exist'''
-    db = jsondb(dbfile)
+    db = minidb(dbfile)
     direntries = db.getall()
     for directory in direntries:
         if not os.path.exists(os.path.join(dpath, directory)):
@@ -99,7 +50,7 @@ def remove_nonexistant_directories_in_db(dbfile, dpath):
 
 def force_reload_db(dbfile, dpath):
     '''forces reloading of db entries from scratch'''
-    db = jsondb(dbfile)
+    db = minidb(dbfile)
     db.deldb()
     dirlist = get_directory_list(dpath)
     for directory in dirlist:
@@ -123,7 +74,7 @@ def add_directory_sizedbfile(dbfile, dpath, directory):
     '''update db with direxctory size'''
     dirname = sanitize(directory)
     fullpath = os.path.join(dpath, dirname)
-    db = jsondb(dbfile)
+    db = minidb(dbfile)
     dirsize = get_directory_size(fullpath)
     db.set(dirname, dirsize)
     db.dumpdb()
@@ -131,7 +82,7 @@ def add_directory_sizedbfile(dbfile, dpath, directory):
 def get_size(dbfile, directory):
     '''returns the directory size from the db'''
     dirname = sanitize(directory)
-    db = jsondb(dbfile)
+    db = minidb(dbfile)
     return db.get(dirname)
 
 def read_options():
