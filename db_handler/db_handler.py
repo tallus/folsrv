@@ -5,7 +5,7 @@ import os
 import sys
 import re
 import argparse
-import minidb.MiniDB as minidb
+from minidb import MiniDB as minidb
 
 class MyError(Exception):
     pass
